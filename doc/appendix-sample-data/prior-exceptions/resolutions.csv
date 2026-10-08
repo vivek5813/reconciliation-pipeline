@@ -1,0 +1,11 @@
+exception_id,project_id,cycle,exception_type,description,resolution,resolved_by,resolution_date,instruction_recurring
+EX-2025-0712,PRJ-NS-7421,2025-07,RATE_OVERRIDE,Engineer II logged 4 hours at off-hours weekend rate; contract has no off-hours rate.,Bill at standard ENG2 rate. PL confirmed - no off-hours rate exists for this project.,Maya Okonkwo,2025-07-15,Y
+EX-2025-0828,PRJ-NS-7421,2025-08,EXPENSE_OVERLIMIT,Hotel charge 290 USD/night at coastal point B (cap 195).,Bill at full amount. PL approved - no alternatives available at site.,Maya Okonkwo,2025-08-30,Y
+EX-2025-0911,PRJ-NS-7421,2025-09,EXPENSE_DISALLOWED,Alcohol charge 38 USD on hotel folio dinner receipt.,Reject. Not reimbursable per contract regardless of receipt total.,Maya Okonkwo,2025-09-13,Y
+EX-2025-1003,PRJ-NS-7421,2025-10,MISSING_RECEIPT,Drafting supplies 67 USD - no receipt in SharePoint.,Hold pending receipt. After 30 days no receipt produced - not billable.,Sam Eshetu (senior),2025-11-04,Y
+EX-2025-1108,PRJ-NS-7421,2025-11,COMPOSITE_DOC,Single scan contained 3 receipts totalling 245 USD; Analyst couldn't tell which was which.,Returned to traveller for itemized resubmission.,Maya Okonkwo,2025-11-12,N
+EX-2025-1129,PRJ-NS-7421,2025-11,SUBCONTRACTOR_MARKUP,Subcontractor invoice received without markup applied.,Apply 8% per MSA section 3. Standing rule for this contract.,Maya Okonkwo,2025-11-30,Y
+EX-2026-0117,PRJ-NS-7421,2026-01,HOLD_RELEASE,3 transactions on hold for >2 cycles awaiting PL decision.,Released after PL email confirmation; transactions billed on cycle 2026-01.,Sam Eshetu (senior),2026-01-19,N
+EX-2026-0203,PRJ-NS-7421,2026-02,MISCODED_TIME,Internal team meeting time logged against client project task code.,Removed from invoice. PL escalated to internal time-coding owner. Recurring issue across multiple projects.,Maya Okonkwo,2026-02-04,Y
+EX-2026-0314,PRJ-NS-7421,2026-03,FOREIGN_CURRENCY,Receipt in CAD on a USD-billed project.,Convert at receipt-date FX. PL confirmed standard practice.,Maya Okonkwo,2026-03-15,Y
+EX-2026-0327,PRJ-OTHER-9912,2026-03,RATE_OVERRIDE,Different project - principal time logged above 5% cap; cap is project-specific.,Bill all hours - no cap on this project. Different from PRJ-NS-7421.,Sam Eshetu (senior),2026-03-29,Y

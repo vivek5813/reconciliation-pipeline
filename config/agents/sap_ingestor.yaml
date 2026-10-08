@@ -1,0 +1,34 @@
+# SAP Ingestor — deterministic stage. No model / prompt_version (not an LLM agent).
+# Source: unbilled-2026-04.csv per reconciliation-flow.md §5.1 — the full
+# SAP-side unbilled-transaction extract (LABOR + EXPENSE, rate/amount/currency
+# populated, per-TX classification code). This is the stream the §5.2 Contract
+# Compliance Checker consumes downstream.
+
+agent: sap_ingestor
+type: deterministic
+
+# Input location (relative to pipeline.yaml paths.data_dir).
+source:
+  filename: "transactions/unbilled-2026-04.csv"
+  encoding: "utf-8"
+
+# Any row missing one of these mandatory fields is excluded from the TX stream
+# and emitted as an IngestError (data-quality defect per §5.1 check #2).
+mandatory_fields:
+  - transaction_id
+  - project_id
+  - transaction_date
+  - type
+  - amount
+  - currency
+
+# On duplicate primary key: first row wins; subsequent duplicates become IngestErrors.
+duplicate_policy: "first_wins"
+
+# Values in the CSV `hold_flag` column that denote a true hold (SAPTransaction.hold_flag=True).
+hold_flag_true_values:
+  - "Y"
+  - "y"
+  - "true"
+  - "TRUE"
+  - "1"

@@ -1,0 +1,12 @@
+anthropic
+pandas
+python-dotenv
+tabulate
+openpyxl
+
+# Pipeline stack (Part 1: SharePoint intake + layout extraction)
+langgraph>=0.2
+pydantic>=2
+pyyaml
+typer
+structlog

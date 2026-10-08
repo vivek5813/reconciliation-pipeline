@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meridian Atlas Partners — Hackathon Participant Intro</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg-alt: #161922;
+    --fg: #e8eaf0;
+    --muted: #9aa2b1;
+    --accent: #7c5cff;
+    --accent-2: #25d0a8;
+    --border: #262a36;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
+  .deck {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  .slide {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    padding: 6vh 8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .slide.cover {
+    background: radial-gradient(ellipse at top left, rgba(124, 92, 255, 0.25), transparent 60%),
+                radial-gradient(ellipse at bottom right, rgba(37, 208, 168, 0.18), transparent 60%),
+                var(--bg);
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    line-height: 1.1;
+    margin: 0 0 1.2rem 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0 0 1.5rem 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.4rem 0;
+    color: var(--fg);
+    font-weight: 600;
+  }
+  p, li {
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--fg);
+  }
+  .lead {
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+  }
+  .card .label {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .card .value {
+    color: var(--accent-2);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  ul.clean {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.clean li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0.8rem;
+  }
+  ul.clean li:last-child { border-bottom: none; }
+  ul.clean li::before {
+    content: "→";
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .pillrow {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  .pill {
+    background: rgba(124, 92, 255, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(124, 92, 255, 0.3);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .nav {
+    position: fixed;
+    bottom: 1.5rem; right: 1.5rem;
+    background: rgba(22, 25, 34, 0.85);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    z-index: 50;
+  }
+  .nav .count { color: var(--fg); font-weight: 600; }
+  .hint {
+    position: fixed;
+    bottom: 1.5rem; left: 1.5rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    z-index: 50;
+  }
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .kpi {
+    background: var(--bg-alt);
+    border-left: 3px solid var(--accent-2);
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+  }
+  .kpi .k { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .kpi .v { color: var(--accent-2); font-weight: 700; font-size: 1.1rem; }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  @media (max-width: 800px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+  .footer-link {
+    margin-top: 2rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(124, 92, 255, 0.4);
+    padding-bottom: 2px;
+    display: inline-block;
+    font-weight: 500;
+  }
+  .footer-link:hover { color: var(--fg); border-color: var(--fg); }
+</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Gress, James</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">1800.00000000000</mso:Order>
+<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Gress, James</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
+<mso:ContentTypeId msdt:dt="string">0x010100A47853827E72FE4E99C841D5CD17F6E1</mso:ContentTypeId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <section class="slide cover">
+    <div class="eyebrow">Hackathon · Day 2 of 3 · RDE Pod Simulation</div>
+    <h1>Reinventing the monthly client billing cycle at Meridian Atlas Partners</h1>
+    <p class="lead">Simulate an RDE pod: qualify the opportunity, design the target process, and prove the highest-value slice with a working prototype. Day 2 is the build day. Day 3 is the executive pitch. Teams of 3–4.</p>
+    <div class="pillrow">
+      <span class="pill">Professional services</span>
+      <span class="pill">SAP · SharePoint</span>
+      <span class="pill">~20,000 invoices / month</span>
+      <span class="pill">Agentic redesign</span>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">The client</div>
+    <h2>Meridian Atlas Partners</h2>
+    <p class="lead">A global project-based professional services firm. Time-and-materials work dominates, with thousands of active engagements at any moment.</p>
+    <div class="grid">
+      <div class="card"><div class="label">Headcount</div><div class="value">~12,000</div></div>
+      <div class="card"><div class="label">Active engagements</div><div class="value">Several thousand</div></div>
+      <div class="card"><div class="label">Core ERP</div><div class="value">SAP</div></div>
+      <div class="card"><div class="label">Document store</div><div class="value">SharePoint</div></div>
+      <div class="card"><div class="label">Regions</div><div class="value">NA · LATAM · EMEA · APAC · ANZ</div></div>
+      <div class="card"><div class="label">Billing team</div><div class="value">~200 analysts globally</div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">The problem</div>
+    <h2>Billing is the bottleneck that won't scale</h2>
+    <p class="lead">The monthly billing cycle is highly manual, sensitive to upstream data quality, and consumes a disproportionate share of senior billing-team time. Leadership is convinced the current model won't scale economically as Meridian grows.</p>
+    <ul class="clean" style="margin-top: 1.5rem; max-width: 70ch;">
+      <li>Backup documents arrive in inconsistent formats, ordering, and quality.</li>
+      <li>Reconciliation between SAP outputs and backup documents is line-by-line in Excel.</li>
+      <li>The same exceptions repeat cycle after cycle — re-decided from scratch each time.</li>
+      <li>Instructions are scattered across SAP notes, email, Teams, ServiceNow tickets, and analyst heads.</li>
+      <li>Any approved adjustment triggers full re-validation of the entire invoice.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">Process at a glance</div>
+    <h2>Where the time goes today</h2>
+    <p class="lead">Draft invoices already exist in SAP. The case begins <em>after</em> the draft, and ends with a delivered invoice.</p>
+    <ul class="clean" style="margin-top: 1.5rem; max-width: 75ch;">
+      <li><strong>Cost & time capture</strong> — staff time and expenses accumulate as unbilled transactions.</li>
+      <li><strong>Draft generation</strong> — produced by analyst or scheduled batch job in SAP.</li>
+      <li><strong>Backup collation</strong> — pull receipts, vendor invoices, hotel folios, mileage from SharePoint.</li>
+      <li><strong>Reconciliation</strong> — match SAP outputs against backup documents; annotate discrepancies.</li>
+      <li><strong>Exception triage</strong> — investigate anomalies; chase context across channels.</li>
+      <li><strong>Two-stage review</strong> — Project Finance Analyst, then Project Lead.</li>
+      <li><strong>Adjustments → release → archive</strong> — all manual in SAP.</li>
+    </ul>
+    <p class="meta" style="margin-top: 1.2rem;">Most analyst time is spent on steps 3–7. Time-and-materials invoices drive almost all of that load.</p>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">Stakeholders</div>
+    <h2>Who's involved</h2>
+    <div class="grid">
+      <div class="card"><h3>Billing Analyst</h3><p class="meta">Execution: collation, reconciliation, exceptions, SAP adjustments, release.</p></div>
+      <div class="card"><h3>Senior Billing Analyst</h3><p class="meta">Edge cases, custom templates, escalation, informal mentorship.</p></div>
+      <div class="card"><h3>Project Finance Analyst</h3><p class="meta">First-level review — margin, cost confirmation, exception sanity.</p></div>
+      <div class="card"><h3>Project Lead</h3><p class="meta">Final approver. Accountable to the client. Workflow must stay <strong>undisturbed</strong>.</p></div>
+      <div class="card"><h3>Billing Ops Lead</h3><p class="meta">Process owner, KPI accountable, change sponsor.</p></div>
+      <div class="card"><h3>Finance Sponsor</h3><p class="meta">Senior executive — funding, working capital, strategic direction.</p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">KPI targets</div>
+    <h2>What "success" looks like</h2>
+    <p class="lead">Leadership has set minimum thresholds — not stretch targets. Your business case must map your design to one or more of them.</p>
+    <div class="kpi-row">
+      <div class="kpi"><div class="k">Cost per invoice</div><div class="v">≥ 50% reduction</div></div>
+      <div class="kpi"><div class="k">Invoice cycle time</div><div class="v">≥ 25% reduction</div></div>
+      <div class="kpi"><div class="k">Analyst hours / invoice</div><div class="v">≥ 50% reduction</div></div>
+      <div class="kpi"><div class="k">Exceptions resolved w/o Project Lead</div><div class="v">≥ 55%</div></div>
+      <div class="kpi"><div class="k">Document data extraction accuracy</div><div class="v">≥ 90%</div></div>
+      <div class="kpi"><div class="k">First-pass approval rate</div><div class="v">≥ 90%</div></div>
+      <div class="kpi"><div class="k">Critical compliance failures</div><div class="v">0</div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">Your mission · Day 2 builds · Day 3 presents</div>
+    <h2>By end of Day 2, your team will have…</h2>
+    <ul class="clean" style="max-width: 75ch;">
+      <li><strong>Qualified the RDE opportunity</strong> — problem statement, success criteria, MVP boundary.</li>
+      <li><strong>Designed the reinvented process</strong> end-to-end — steps eliminated or restructured, not just automated. Focus areas: billing requirements &amp; instruction capture · document extraction &amp; reconciliation · exception triage &amp; resolution · analyst workbench &amp; knowledge capture.</li>
+      <li><strong>Proved the highest-value slice</strong> — runnable prototype on Appendix A data. Not every improvement requires AI; the strongest designs combine process redesign with targeted automation.</li>
+      <li><strong>Packaged the engagement case</strong> — build cost, run cost, value, payback, go-live readiness, Day-91 roadmap.</li>
+      <li><strong>Prepared the executive pitch</strong> — 5–7 slides with live demo, delivered on Day 3.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">Non-negotiables</div>
+    <h2>Business requirements</h2>
+    <ul class="clean" style="max-width: 75ch;">
+      <li><strong>SAP is the system of record.</strong> Your solution integrates with SAP — it does not replace it.</li>
+      <li><strong>SAP holds financial data — any update to it must be risk-free.</strong> Mistaken or unauthorised changes are not acceptable.</li>
+      <li><strong>Project Leads remain undisturbed</strong> during this initiative.</li>
+      <li><strong>Compliance and audit traceability</strong> are non-negotiable.</li>
+      <li><strong>Achieve or exceed the KPI targets.</strong></li>
+      <li><strong>No real client data.</strong> Use only Appendix A or your own synthetic equivalents.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">Deliverables · built Day 2 · presented Day 3</div>
+    <h2>What your team produces</h2>
+    <div class="grid">
+      <div class="card"><h3>Qualified use case</h3><p class="meta">Problem statement, success criteria, MVP boundary, and RDE-fit rationale.</p></div>
+      <div class="card"><h3>Target process design</h3><p class="meta">Current vs. future. Roles, hand-offs, human-in-the-loop touchpoints.</p></div>
+      <div class="card"><h3>Working prototype</h3><p class="meta">Runnable on Appendix A data. Edge-case handling, controls, escalation paths.</p></div>
+      <div class="card"><h3>Business case</h3><p class="meta">Build cost, run cost, value, payback, regional sensitivity, risk-adjusted view.</p></div>
+      <div class="card"><h3>Go-live readiness</h3><p class="meta">Data inputs, dependency and risk register, security, adoption, support model.</p></div>
+      <div class="card"><h3>Day-91 roadmap + pitch</h3><p class="meta">Scale-up roadmap. Executive pitch with live demo presented on Day 3.</p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">How you will be judged</div>
+    <h2>Scoring criteria</h2>
+    <p class="lead">A narrow solution that runs will outscore an ambitious concept that doesn't. Judges score six dimensions.</p>
+    <div class="kpi-row" style="margin-top: 1.5rem;">
+      <div class="kpi"><div class="k">Problem framing &amp; use-case selection</div><div class="v">15 pts</div></div>
+      <div class="kpi"><div class="k">Process reinvention quality</div><div class="v">20 pts</div></div>
+      <div class="kpi"><div class="k">Working prototype</div><div class="v">25 pts</div></div>
+      <div class="kpi"><div class="k">Value hypothesis &amp; business case</div><div class="v">15 pts</div></div>
+      <div class="kpi"><div class="k">Go-live readiness</div><div class="v">15 pts</div></div>
+      <div class="kpi"><div class="k">Scale-up story &amp; executive clarity</div><div class="v">10 pts</div></div>
+    </div>
+    <p class="meta" style="margin-top: 1.2rem;">Bonus: up to +5 pts for C-suite presentation readiness. Total: 105 points.</p>
+  </section>
+
+  <section class="slide cover">
+    <div class="eyebrow">Before Day 2 begins</div>
+    <h2>Read the full brief tonight</h2>
+    <p class="lead">This intro is the high-level frame. The participant brief has the depth: pain-point detail, data sources, regional dynamics, guiding questions, and the Appendix A data pack. Day 2 starts in execution mode — arrive with clarifying questions and initial hypotheses ready.</p>
+    <a class="footer-link" href="participant-brief.md">📄 Open the full participant brief →</a>
+    <p class="meta" style="margin-top: 2rem;">Day 2: build. Day 3: pitch. Good luck.</p>
+  </section>
+
+</div>
+
+<div class="nav">Slide <span class="count" id="cur">1</span> / <span id="tot">1</span></div>
+<div class="hint">↑ ↓ to navigate · scroll to browse</div>
+
+<script>
+  const deck = document.getElementById('deck');
+  const slides = deck.querySelectorAll('.slide');
+  document.getElementById('tot').textContent = slides.length;
+
+  function currentSlide() {
+    const top = deck.scrollTop;
+    const h = window.innerHeight;
+    return Math.min(slides.length - 1, Math.round(top / h));
+  }
+  function update() {
+    document.getElementById('cur').textContent = currentSlide() + 1;
+  }
+  function go(delta) {
+    const next = Math.max(0, Math.min(slides.length - 1, currentSlide() + delta));
+    slides[next].scrollIntoView({ behavior: 'smooth' });
+  }
+  deck.addEventListener('scroll', update);
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); go(1); }
+    if (['ArrowUp','PageUp'].includes(e.key)) { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); slides[0].scrollIntoView({behavior:'smooth'}); }
+    if (e.key === 'End') { e.preventDefault(); slides[slides.length-1].scrollIntoView({behavior:'smooth'}); }
+  });
+  update();
+</script>
+</body>
+</html>

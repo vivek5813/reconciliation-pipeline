@@ -1,0 +1,31 @@
+---
+description: Always consult the tech architecture blueprint before planning any change
+alwaysApply: true
+---
+
+# Consult the Architecture Blueprint First
+
+Before planning, proposing, or implementing **any** change in this repo, read
+[`tech-architecture-flow.md`](../../tech-architecture-flow.md) and align your plan with it.
+
+It defines the non-negotiable shape of this codebase:
+
+- **One job per stage**, deterministic by default, LLM only where human judgment is needed.
+- **Confidence is a first-class output**; a separate router decides HITL vs. auto-pass — agents never self-escalate.
+- **Pydantic contracts at every boundary** (YAML → config, LLM JSON → DTO, state → pipeline state).
+- **One YAML config per agent** under `config/agents/` — `model:` / `prompt_version:` / thresholds live there, never in code.
+- **Idempotent re-runs** unless `--force` is passed.
+- **Two separate log streams**: operational JSON logs and per-unit append-only evidence JSONL. Never conflate them.
+- **HITL decides, doesn't invent**; each analyst action emits one `DecisionEvent`.
+- **Seams, not silos** — a stage's output contract is the next stage's input contract.
+- **Secrets via env only** (`.env` + `.gitignore`).
+
+## What this means in practice
+
+1. **Before writing a plan**, state which section(s) of `tech-architecture-flow.md` the change touches (e.g. "§3 stack", "§2 principle 5", "§1 pipeline shape").
+2. **New agent?** Add a `config/agents/<agent>.yaml` and a LangGraph node in `src/meridian/agents/`; wire it in `graph.py`. Do not hardcode models or thresholds.
+3. **New data crossing a boundary?** Define/extend a Pydantic model — do not pass raw dicts.
+4. **New decision point?** Emit confidence + route via a separate router node; append a `DecisionEvent` to the evidence JSONL.
+5. **Deviating from the blueprint?** Call it out explicitly in the plan with a one-line justification, so the user can approve the deviation before code is written.
+
+If `tech-architecture-flow.md` is missing or the change contradicts it, stop and flag it rather than silently diverging.

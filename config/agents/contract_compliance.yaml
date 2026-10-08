@@ -1,0 +1,158 @@
+# Contract Compliance Checker — deterministic stage. No model / prompt_version.
+#
+# `rules` is a structured, machine-readable transcription of
+# doc/appendix-sample-data/contracts/contract-001.md §3–§5 plus the §9 SAP
+# notes. For the hackathon prototype these rules are hand-encoded (per
+# reconciliation-flow.md §5.2); in production a future ContractIngestor
+# pre-stage would emit this object from the authoritative contract source
+# keyed on (contract_id, effective_date) — see §10 open question.
+#
+# Any clause changes to contract-001.md must be mirrored here, and
+# `rules.rules_version` bumped so cached contract-compliance artefacts
+# invalidate on their next run.
+
+agent: contract_compliance
+type: deterministic
+
+rules:
+  contract_id: "MSA-NS-2024-0418"
+  project_id: "PRJ-NS-7421"
+  currency: "USD"
+  classification_code: "STD-TM-NA-CIVIC"      # §5 invoicing clause
+
+  # §3 — standard role rates (USD/hr). Rates apply to all approved time
+  # logged against the project unless overridden in writing by the Project Lead.
+  role_rates:
+    ENG1: 145     # Engineer I
+    ENG2: 175     # Engineer II
+    ENG3: 230     # Senior Engineer
+    PM1:  215     # Project Manager
+    PRIN: 320     # Principal
+    ADMIN: 95     # Admin / Coordinator
+
+  # §3 — travel time billable at 50% of role rate, capped at 8 h per
+  # traveller per direction.
+  travel_rate_factor: 0.5
+  travel_cap_hours_per_direction: 8
+
+  # §3 — subcontractor pass-through permitted at cost plus 8%.
+  subcontractor_markup_pct: 8
+
+  # §4 — mileage at the prevailing federal mileage rate. The CSV uses 0.67
+  # USD/mi; this knob stays in config so the policy owner can update it
+  # when the federal rate changes.
+  mileage_rate_usd_per_mile: 0.67
+
+  expense_rules:
+    lodging_cap_metro_usd: 275      # §4 — major metros
+    lodging_cap_other_usd: 195      # §4 — elsewhere
+    meal_cap_usd_per_day: 90        # §4 — meals-with-receipt per day per traveller
+    per_diem_usd_per_day: 65        # §4 — per-diem in lieu of receipts
+    per_diem_stackable_with_meal: false  # §4 — "not stackable with [meal receipts]"
+    receipt_threshold_usd: 25       # §4 — receipts required above USD 25
+    alcohol: "NOT_REIMBURSABLE"            # §4
+    personal_items: "NOT_REIMBURSABLE"     # §4
+    entertainment: "REQUIRES_PL_APPROVAL"  # §4
+
+  # §9 — structured SAP notes. Only PRIN_CAP_PCT is machine-enforced today;
+  # the others are free-text in the contract and belong to triage.
+  sap_notes:
+    - rule: "PRIN_CAP_PCT"
+      value: 5
+      scope: "monthly_hours"
+      source_date: "2025-02"
+      overridable: true
+
+  heuristics:
+    # Sample pack has no city column; default to "other" so the stricter cap
+    # isn't applied by accident. Switch to "metro" per task_code / per
+    # project when city metadata lands.
+    lodging_default_tier: "other"
+
+    # Trip-grouping policy for TRAVEL_CAP_EXCEEDED. The design doc §10 flags
+    # proper employee+date-proximity grouping as still-to-specify; for now we
+    # evaluate per-TX and will revisit when a trip id lands upstream.
+    trip_grouping: "per_tx"
+
+    # Case-insensitive substring matches against SAPTransaction.description.
+    alcohol_keywords:
+      - "alcohol"
+      - "wine"
+      - "beer"
+      - "cocktail"
+      - "spirits"
+      - "bar tab"
+      - "incl alcohol"
+      - "mixed: incl alcohol"
+
+    personal_item_keywords:
+      - "personal item"
+      - "personal items"
+      - "laundry"
+      - "mini-bar"
+      - "minibar"
+      - "toiletries"
+      - "(laundry)"
+
+    entertainment_keywords:
+      - "entertainment"
+      - "airport lounge"
+      - "lounge access"
+      - "sporting event"
+      - "concert"
+      - "theatre"
+      - "theater"
+
+    per_diem_description_markers:
+      - "per diem"
+      - "per-diem"
+
+    lodging_description_markers:
+      - "hotel"
+      - "lodging"
+      - "accommodation"
+
+    meal_description_markers:
+      - "lunch"
+      - "dinner"
+      - "breakfast"
+      - "meal"
+      - "team dinner"
+      - "client dinner"
+
+    travel_description_markers:
+      - "travel time"
+      - "travel – "
+      - "travel - "
+      - "travel outbound"
+      - "travel return"
+      - "travel inbound"
+
+    subcontractor_description_markers:
+      - "subcontractor"
+      - "sub-contractor"
+
+    # Note-column markers that indicate a receipt is explicitly missing even
+    # though the TX amount is above the threshold.
+    receipt_missing_markers:
+      - "missing"
+      - "no receipt"
+      - "receipt: missing"
+      - "receipt lost"
+
+    # Units for which §4 explicitly waives the receipt requirement.
+    receipt_waived_units:
+      - "MI"
+      - "DAY"
+
+    # SAP vendor-id prefixes that mark a TX as a subcontractor pass-through
+    # (e.g. SUB-AERO on TX-2026-04-0044).
+    subcontractor_employee_prefixes:
+      - "SUB"
+
+    markup_match_tolerance_usd: 0.01
+    rate_match_tolerance_usd: 0.005
+
+  # Bump this when any clause above changes; it drives cache invalidation
+  # on the contract-compliance artefact.
+  rules_version: "MSA-NS-2024-0418@2024-09-01"

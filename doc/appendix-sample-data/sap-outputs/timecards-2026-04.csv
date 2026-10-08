@@ -1,0 +1,24 @@
+timecard_id,employee_id,employee_name,project_id,task_code,entry_date,week_ending,hours,activity_description,submitted_date,approver_id,approver_name,approval_date,approval_status,linked_tx_id,note
+TC-2604-001,E-1041,D. Okafor,PRJ-NS-7421,T-100,2026-03-30,2026-04-04,4.0,Site survey prep – data review and pre-trip planning,2026-04-04,E-3055,M. Delgado,2026-04-05,APPROVED,TX-2026-04-0001,
+TC-2604-002,E-1041,D. Okafor,PRJ-NS-7421,T-100,2026-03-31,2026-04-04,7.5,Site survey prep – logistics and stakeholder pack,2026-04-04,E-3055,M. Delgado,2026-04-05,APPROVED,TX-2026-04-0002,
+TC-2604-003,E-1041,D. Okafor,PRJ-NS-7421,T-110,2026-04-01,2026-04-04,8.0,Coastal point A field survey,2026-04-04,E-3055,M. Delgado,2026-04-05,APPROVED,TX-2026-04-0003,
+TC-2604-004,E-1041,D. Okafor,PRJ-NS-7421,T-110,2026-04-01,2026-04-04,4.0,Travel – home to coastal point A,2026-04-04,E-3055,M. Delgado,2026-04-05,APPROVED,TX-2026-04-0004,Travel time billed at 50% rate per contract
+TC-2604-005,E-1041,D. Okafor,PRJ-NS-7421,T-110,2026-04-02,2026-04-04,9.0,Coastal point B reconnaissance – second-day field work,2026-04-04,E-3055,M. Delgado,2026-04-05,APPROVED,TX-2026-04-0005,
+TC-2604-006,E-1041,D. Okafor,PRJ-NS-7421,T-110,2026-04-02,2026-04-04,4.0,Travel – coastal point A return to home,2026-04-04,E-3055,M. Delgado,2026-04-05,APPROVED,TX-2026-04-0006,Travel time billed at 50% rate per contract
+TC-2604-007,E-2210,S. Osei,PRJ-NS-7421,T-200,2026-04-03,2026-04-04,6.0,Stakeholder workshop facilitation,2026-04-04,E-3055,M. Delgado,2026-04-06,APPROVED,TX-2026-04-0007,
+TC-2604-008,E-2210,S. Osei,PRJ-NS-7421,T-200,2026-04-03,2026-04-04,3.5,Workshop materials and facilitation prep,2026-04-04,E-3055,M. Delgado,2026-04-06,APPROVED,TX-2026-04-0008,
+TC-2604-009,E-3055,M. Delgado,PRJ-NS-7421,T-300,2026-04-06,2026-04-11,1.5,Client status call,2026-04-11,E-4501,J. Whitmore,2026-04-13,APPROVED,TX-2026-04-0009,
+TC-2604-010,E-3055,M. Delgado,PRJ-NS-7421,T-300,2026-04-06,2026-04-11,2.0,Internal PM coordination and schedule review,2026-04-11,E-4501,J. Whitmore,2026-04-13,APPROVED,TX-2026-04-0010,
+TC-2604-011,E-3055,M. Delgado,PRJ-NS-7421,T-300,2026-04-08,2026-04-11,1.0,Project schedule update,2026-04-11,E-4501,J. Whitmore,2026-04-13,APPROVED,TX-2026-04-0011,
+TC-2604-012,E-4501,J. Whitmore,PRJ-NS-7421,T-400,2026-04-09,2026-04-11,2.0,Phase review meeting with project team,2026-04-11,E-4501,J. Whitmore,2026-04-11,APPROVED,TX-2026-04-0012,Self-certified per principals policy
+TC-2604-013,E-4501,J. Whitmore,PRJ-NS-7421,T-400,2026-04-09,2026-04-11,1.5,Strategy guidance – engagement direction,2026-04-11,E-4501,J. Whitmore,2026-04-11,APPROVED_HOLD,TX-2026-04-0013,SAP hold applied post-approval: above 5% PRIN monthly hours cap. Pending PL confirmation.
+TC-2604-014,E-5102,A. Cho,PRJ-NS-7421,T-500,2026-04-10,2026-04-11,8.0,Drawing markup – Phase 2 site plans,2026-04-11,E-3055,M. Delgado,2026-04-13,APPROVED,TX-2026-04-0014,
+TC-2604-015,E-5102,A. Cho,PRJ-NS-7421,T-500,2026-04-13,2026-04-18,7.5,Drawing markup – Phase 2 site plans (continued),2026-04-18,E-3055,M. Delgado,2026-04-20,APPROVED,TX-2026-04-0015,
+TC-2604-016,E-5102,A. Cho,PRJ-NS-7421,T-500,2026-04-14,2026-04-18,8.0,Drawing markup – revision cycle 1,2026-04-18,E-3055,M. Delgado,2026-04-20,APPROVED,TX-2026-04-0016,
+TC-2604-017,E-5102,A. Cho,PRJ-NS-7421,T-500,2026-04-15,2026-04-18,4.0,Drawing markup – revision cycle 1 (morning session),2026-04-18,E-3055,M. Delgado,2026-04-20,APPROVED,TX-2026-04-0017,
+TC-2604-018,E-2210,S. Osei,PRJ-NS-7421,T-600,2026-04-16,2026-04-18,6.5,Feasibility report – initial draft sections 1–3,2026-04-18,E-3055,M. Delgado,2026-04-20,APPROVED,TX-2026-04-0018,
+TC-2604-019,E-2210,S. Osei,PRJ-NS-7421,T-600,2026-04-17,2026-04-18,8.0,Feasibility report – draft sections 4–6,2026-04-18,E-3055,M. Delgado,2026-04-20,APPROVED,TX-2026-04-0019,
+TC-2604-020,E-2210,S. Osei,PRJ-NS-7421,T-600,2026-04-20,2026-04-25,4.5,Report review and internal QA,2026-04-25,E-3055,M. Delgado,2026-04-27,APPROVED,TX-2026-04-0020,
+TC-2604-021,E-9001,P. Kumar,PRJ-NS-7421,T-700,2026-04-22,2026-04-25,3.0,Document admin and filing,2026-04-25,E-3055,M. Delgado,2026-04-27,APPROVED,TX-2026-04-0021,
+TC-2604-022,E-2210,S. Osei,PRJ-NS-7421,T-600,2026-04-19,2026-04-25,3.0,Azure Foundations training – team T&D day,2026-04-25,E-3055,M. Delgado,2026-04-27,APPROVED_HOLD,TX-2026-04-0045,Coded to PRJ-NS-7421/T-600 by submitter. SAP hold: appears to be internal T&D – firmwide training day ref HR-TRN-2026-04-19-AZF. Recommend recode to internal overhead.
+TC-2604-023,E-3055,M. Delgado,PRJ-NS-7421,T-300,2026-04-15,2026-04-18,0.5,Weekly PMO admin sync – internal ops call,2026-04-18,E-4501,J. Whitmore,2026-04-20,APPROVED_HOLD,TX-2026-04-0047,Submitted under T-300 (client status task). SAP hold: description suggests internal PMO overhead rather than client project coordination. Pending Analyst review.

@@ -1,0 +1,30 @@
+# Exception Emitter — deterministic stage. No model / prompt_version.
+#
+# Reads the cached SAP-ingest and contract-compliance artefacts and
+# categorises every SAPTransaction into exactly one of two buckets per
+# reconciliation-flow.md §5.3:
+#
+#   * AUTO_PASS_SAP_INTERNAL — SAP-side clean, no contract violations, no
+#     structural flags. Flows into local/auto_pass/<cycle>.json.
+#   * ExceptionCandidate     — anything else. Flows into
+#     local/exceptions/<cycle>.json with a typed `codes[]` list.
+#
+# No decisions, no prioritisation — triage's Confidence Router owns both.
+# Design doc: doc/design/reconciliation-flow.md §5.3 / §6.
+
+agent: exception_emitter
+type: deterministic
+
+# Toggles for the structural codes the emitter is responsible for detecting
+# (contract-compliance codes always flow through from the upstream stage).
+structural_codes:
+  enable_backup_ref_match: true   # BACKUP_REF_PRESENT_NEEDS_MATCH on TX with backup_ref
+  enable_foreign_currency: true   # FOREIGN_CURRENCY on TX whose currency != cycle modal
+
+# Candidate IDs are deterministic across runs: `<prefix>-<cycle>-<tx_short>-<seq>`.
+candidate_id_prefix: "EC"
+
+# Feeds the idempotency cache key alongside the SAP source hash and the
+# contract rules_version. Bump when the categorisation rule in
+# `exception_emitter.py` changes so cached buckets invalidate.
+emitter_logic_version: "emitter_v1"

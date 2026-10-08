@@ -1,0 +1,20 @@
+# Pipeline-level configuration.
+# Paths are resolved relative to the repository root.
+# Business batch window is the SAP billing cycle (year-month).
+
+cycle: "2026-04"
+
+paths:
+  data_dir: "doc/appendix-sample-data"
+  local_dir: "local"
+  raw_dir: "local/raw"
+  sap_ingested_dir: "local/sap_ingested"
+  contract_compliance_dir: "local/contract_compliance"
+  auto_pass_dir: "local/auto_pass"
+  exceptions_dir: "local/exceptions"
+  evidence_dir: "local/evidence"
+  logs_dir: "local/logs"
+
+logging:
+  level: "INFO"
+  file: "local/logs/meridian.jsonl"

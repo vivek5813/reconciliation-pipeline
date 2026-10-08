@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meridian"
+version = "0.1.0"
+description = "Agentic document-extraction pipeline for Meridian Atlas Partners"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic",
+    "pandas",
+    "python-dotenv",
+    "tabulate",
+    "openpyxl",
+    "langgraph>=0.2",
+    "pydantic>=2",
+    "pyyaml",
+    "typer",
+    "structlog",
+]
+
+[project.scripts]
+meridian = "meridian.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
